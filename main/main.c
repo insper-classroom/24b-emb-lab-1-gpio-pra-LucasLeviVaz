@@ -39,15 +39,11 @@ int main() {
     gpio_set_dir(D_PIN, GPIO_OUT);
 
     while (true) {
-        int status = gpio_get(LED_PIN);
-        int i;
 
         if (!gpio_get(BTN_PIN)) {
+            gpio_put(LED_PIN, 1);
 
-            if (status == 0){
-                gpio_put(LED_PIN, 1);
-
-                for(i=0; i<=512 ;i++){
+                for(int i=0; i<=512 ;i++){
                     gpio_put(A_PIN, 1);
                     sleep_ms(30);
                     gpio_put(A_PIN, 0);
@@ -69,12 +65,7 @@ int main() {
 
             }
 
-            else {
-                gpio_put(LED_PIN, 0);
-            }
-
             while (!gpio_get(BTN_PIN)) {
             };
         }
     }
-}
